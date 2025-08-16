@@ -1,10 +1,10 @@
 import {useQuery} from '@apollo/client';
 import {useState} from 'react';
-import {UserProfile} from "./components/UserProfile.tsx";
-import {GET_USERS} from "./services/user.ts";
-import type {User} from "./models/domain.ts";
-import {UserForm} from "./components/UserForm.tsx";
-import {Modal} from './components/Modal.tsx';
+import {UserProfile} from "./UserProfile.tsx";
+import {GET_USERS} from "../services/user.ts";
+import type {User} from "../models/domain.ts";
+import {UserForm} from "./UserForm.tsx";
+import {Modal} from './Modal.tsx';
 import styles from './UserView.module.css';
 
 export const UserView = () => {
@@ -19,7 +19,7 @@ export const UserView = () => {
             <h1 className={styles.title}>User View</h1>
             <button className={styles.newUserButton} onClick={() => setShowCreate(true)}>New User</button>
             <Modal open={showCreate} title="Create User" onClose={() => setShowCreate(false)}>
-                <UserForm onSubmitted={() => setShowCreate(false)} />
+                <UserForm onSubmitted={() => setShowCreate(false)}/>
             </Modal>
             <ul className={styles.list}>
                 {users.map((u: User) => <UserProfile key={u.id} user={u}/>)}
