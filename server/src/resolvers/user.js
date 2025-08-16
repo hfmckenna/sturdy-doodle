@@ -40,6 +40,22 @@ export default {
             return deleted
         },
         updateUser: async (parent, {id, firstName, lastName, email}, {db}, info) => {
+            let updatedUser = null
+            await db.update(({ users }) => {
+                const idx = users.findIndex(u => u.id === id)
+                if (idx !== -1) {
+                    const current = users[idx]
+                    const next = {
+                        ...current,
+                        ...(firstName !== undefined ? { firstName } : {}),
+                        ...(lastName !== undefined ? { lastName } : {}),
+                        ...(email !== undefined ? { email } : {}),
+                    }
+                    users[idx] = next
+                    updatedUser = next
+                }
+            })
+            return updatedUser
         }
     }
 }

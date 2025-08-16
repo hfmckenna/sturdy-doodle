@@ -32,3 +32,14 @@ export const DELETE_USER = gql`
     }
 `
 
+export const UPDATE_USER = gql`
+    mutation UpdateUser($id: ID!, $firstName: String, $lastName: String, $email: String) {
+        updateUser(id: $id, firstName: $firstName, lastName: $lastName, email: $email) {
+            id
+            firstName
+            lastName
+            email
+        }
+    }
+`
+

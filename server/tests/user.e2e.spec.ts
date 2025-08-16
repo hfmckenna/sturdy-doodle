@@ -27,13 +27,14 @@ test.describe('User create and delete', () => {
     // Expect header is visible
     await expect(page.getByRole('heading', { name: 'User View' })).toBeVisible();
 
-    // Fill the create user form
-    await page.getByPlaceholder('First name').fill(user.firstName);
-    await page.getByPlaceholder('Last name').fill(user.lastName);
-    await page.getByPlaceholder('Email').fill(user.email);
+    // Fill the create user form (scope specifically to the Add User form)
+    const createForm = page.locator('form').filter({ has: page.getByRole('button', { name: 'Add User' }) });
+    await createForm.getByPlaceholder('First name').fill(user.firstName);
+    await createForm.getByPlaceholder('Last name').fill(user.lastName);
+    await createForm.getByPlaceholder('Email').fill(user.email);
 
     // Submit
-    await page.getByRole('button', { name: 'Add User' }).click();
+    await createForm.getByRole('button', { name: 'Add User' }).click();
 
     const fullName = `${user.firstName} ${user.lastName}`;
 
@@ -46,5 +47,55 @@ test.describe('User create and delete', () => {
 
     // Assert the user is removed
     await expect(page.getByRole('listitem').filter({ hasText: fullName })).toHaveCount(0);
+  });
+});
+
+test.describe('User update (UserForm edit)', () => {
+  test('should update all user fields via the edit UserForm', async ({ page }) => {
+    const user = uniqueUser();
+
+    // 1) Create a user that we will later update
+    await page.goto('/');
+    await expect(page.getByRole('heading', { name: 'User View' })).toBeVisible();
+    const createForm = page.locator('form').filter({ has: page.getByRole('button', { name: 'Add User' }) });
+    await createForm.getByPlaceholder('First name').fill(user.firstName);
+    await createForm.getByPlaceholder('Last name').fill(user.lastName);
+    await createForm.getByPlaceholder('Email').fill(user.email);
+    await createForm.getByRole('button', { name: 'Add User' }).click();
+
+    const originalFullName = `${user.firstName} ${user.lastName}`;
+    const originalLi = await findUserListItem(page, originalFullName);
+    await expect(originalLi).toContainText(user.email);
+
+    // 2) Open the Edit details panel for that user
+    await originalLi.locator('summary', { hasText: 'Edit' }).click();
+
+    // 3) Update each field in the embedded UserForm
+    const updated = {
+      firstName: `${user.firstName}-Updated`,
+      lastName: `${user.lastName}-Changed`,
+      email: `updated+${user.email}`,
+    };
+
+    // Scope all interactions to the same list item to avoid targeting the top create form
+    await originalLi.getByPlaceholder('First name').fill(updated.firstName);
+    await originalLi.getByPlaceholder('Last name').fill(updated.lastName);
+    await originalLi.getByPlaceholder('Email').fill(updated.email);
+
+    // 4) Submit the update form
+    await originalLi.getByRole('button', { name: 'Update User' }).click();
+
+    const updatedFullName = `${updated.firstName} ${updated.lastName}`;
+
+    // 5) Verify that all fields have been updated in the list
+    const updatedLi = await findUserListItem(page, updatedFullName);
+    await expect(updatedLi).toContainText(updated.email);
+
+    // Also verify the old full name is no longer present
+    await expect(page.getByRole('listitem').filter({ hasText: originalFullName })).toHaveCount(0);
+
+    // 6) Cleanup: delete the updated user
+    await updatedLi.getByRole('button', { name: 'Delete' }).click();
+    await expect(page.getByRole('listitem').filter({ hasText: updatedFullName })).toHaveCount(0);
   });
 });

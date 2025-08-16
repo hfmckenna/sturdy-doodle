@@ -5,6 +5,12 @@
       "lastName": "User",
       "email": "test@test.com",
       "id": "bc3e02fa-8a5e-4c1c-b78a-9dad0505876f"
+    },
+    {
+      "id": "d00c7ed8-02bb-41fe-956e-d6ea4cb08f69",
+      "firstName": "E2E1755347711603",
+      "lastName": "User",
+      "email": "e2e.1755347711603@test.local"
     }
   ],
   "courseResults": [
