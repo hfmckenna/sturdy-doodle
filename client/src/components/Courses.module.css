@@ -1,0 +1,62 @@
+.container {
+  margin-top: 8px;
+}
+
+.header {
+  font-weight: 600;
+}
+
+.list {
+  margin: 4px 0 0 16px;
+  padding: 0;
+}
+
+.listItem {
+  margin-bottom: 6px;
+}
+
+/* Base button (kept for any neutral usages) */
+.button {
+  margin-left: 8px;
+  padding: 8px 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #f2f2f2;
+}
+
+/* Colorful course action buttons for visibility in modals */
+.editBtn,
+.deleteBtn {
+  margin-left: 8px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.editBtn { /* iOS indigo */
+  background: #5856d6;
+}
+.editBtn:hover { filter: brightness(0.95); }
+
+.deleteBtn { /* iOS red */
+  background: #ff3b30;
+}
+.deleteBtn:hover { filter: brightness(0.95); }
+
+@media (max-width: 520px) {
+  .button,
+  .editBtn,
+  .deleteBtn {
+    display: block;
+    width: 100%; /* full-width buttons on small screens where it makes sense */
+    margin: 8px 0 0 0;
+  }
+}

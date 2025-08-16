@@ -1,0 +1,44 @@
+.formRow {
+  display: flex;
+  flex-direction: column; /* vertical stack by default */
+  gap: 12px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.formRow input {
+  padding: 10px 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formRow button {
+  padding: 10px 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.formRow button:hover {
+  background: #f2f2f2;
+}
+
+/* On wider screens, allow a horizontal layout when space permits */
+@media (min-width: 720px) {
+  .formRow {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+  .formRow input {
+    flex: 1 1 auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .formRow button {
+    width: 100%; /* full-width primary actions on small screens */
+  }
+}

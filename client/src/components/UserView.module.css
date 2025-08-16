@@ -1,0 +1,72 @@
+:root {}
+
+.container {
+  /* Apple-inspired system font stack */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  color: #111;
+  padding: 16px;
+  background-color: #fafafa;
+}
+
+.narrow {
+  max-width: 680px; /* narrower desktop content */
+  margin: 0 auto;
+}
+
+.title {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px 0;
+  text-align: center;
+}
+
+.actionsCenter {
+  display: flex;
+  justify-content: center;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.newUserButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 0 16px 0;
+  padding: 12px 18px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  background: #34c759; /* iOS system green */
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(52, 199, 89, 0.3);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease, box-shadow 0.15s ease;
+}
+
+.newUserButton:hover {
+  background: #2fc151;
+}
+
+.newUserButton:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(52, 199, 89, 0.25);
+}
+
+.newUserButton:focus-visible {
+  outline: 2px solid #0a84ff; /* iOS blue focus ring */
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .newUserButton {
+    width: 100%;
+  }
+}

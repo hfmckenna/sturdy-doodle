@@ -1,12 +1,12 @@
-import { UserView } from './UserView'
+import {UserView} from './components/UserView.tsx'
 
 function App() {
 
-  return (
-    <>
-      <UserView />
-    </>
-  )
+    return (
+        <>
+            <UserView/>
+        </>
+    )
 }
 
 export default App

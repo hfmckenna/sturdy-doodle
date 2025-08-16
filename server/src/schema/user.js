@@ -3,15 +3,16 @@ import gql from 'graphql-tag'
 export default gql`
     extend type Query {
         users: [User!]
-        user(id: ID!): User!
+        user(id: ID!): User
     }
-    
+
     type User {
-        id: ID
-        lastName: String
-        email: String
+        id: ID!
+        firstName: String!
+        lastName: String!
+        email: String!
     }
-    
+
     extend type Mutation {
         createUser(firstName: String!, lastName: String!, email: String!): User
         deleteUser(id: ID!): Boolean
