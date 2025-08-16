@@ -11,6 +11,24 @@
       "firstName": "E2E1755347711603",
       "lastName": "User",
       "email": "e2e.1755347711603@test.local"
+    },
+    {
+      "id": "035bde07-cee6-4bd0-ac12-5fe39ea66b71",
+      "firstName": "E2E1755351694608",
+      "lastName": "User",
+      "email": "e2e.1755351694608@test.local"
+    },
+    {
+      "id": "e3f830c4-c6c7-4357-9347-e2bbbce91dfb",
+      "firstName": "E2E1755351737324",
+      "lastName": "User",
+      "email": "e2e.1755351737324@test.local"
+    },
+    {
+      "id": "d8a2eb35-c3ee-49d4-af64-d49718ab96ad",
+      "firstName": "E2E1755351772958",
+      "lastName": "User",
+      "email": "e2e.1755351772958@test.local"
     }
   ],
   "courseResults": [
@@ -29,8 +47,26 @@
     {
       "id": "55b307c6-c2d9-4ee2-9517-341a9fdb206f",
       "name": "Cloud",
-      "score": 5,
+      "score": 55,
       "learnerId": "d00c7ed8-02bb-41fe-956e-d6ea4cb08f69"
+    },
+    {
+      "id": "aaafd1ae-2171-4138-934e-79718324961f",
+      "name": "Course 1755351694871",
+      "score": 73,
+      "learnerId": "035bde07-cee6-4bd0-ac12-5fe39ea66b71"
+    },
+    {
+      "id": "7668b833-e992-433d-a58b-e6d44e5764d2",
+      "name": "Course 1755351737586",
+      "score": 73,
+      "learnerId": "e3f830c4-c6c7-4357-9347-e2bbbce91dfb"
+    },
+    {
+      "id": "a169848f-220f-4081-9864-9d0cfbe8402f",
+      "name": "Course 1755351773218",
+      "score": 73,
+      "learnerId": "d8a2eb35-c3ee-49d4-af64-d49718ab96ad"
     }
   ]
 }

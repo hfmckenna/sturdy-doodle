@@ -142,4 +142,61 @@ test.describe('Course results', () => {
     await li.getByRole('button', { name: 'Delete' }).click();
     await expect(page.getByRole('listitem').filter({ hasText: fullName })).toHaveCount(0);
   });
+
+  test('should update a course result for a user and persist after reload', async ({ page }) => {
+    const user = uniqueUser();
+
+    // 1) Create a user
+    await page.goto('/');
+    await expect(page.getByRole('heading', { name: 'User View' })).toBeVisible();
+    const createForm = page.locator('form').filter({ has: page.getByRole('button', { name: 'Add User' }) });
+    await createForm.getByPlaceholder('First name').fill(user.firstName);
+    await createForm.getByPlaceholder('Last name').fill(user.lastName);
+    await createForm.getByPlaceholder('Email').fill(user.email);
+    await createForm.getByRole('button', { name: 'Add User' }).click();
+
+    const fullName = `${user.firstName} ${user.lastName}`;
+    const li = await findUserListItem(page, fullName);
+    await expect(li).toContainText(user.email);
+
+    // 2) Add an initial course result
+    const originalName = `Course ${Date.now()}`;
+    const originalScore = 73;
+    await li.getByPlaceholder('Course name').fill(originalName);
+    await li.getByPlaceholder('Score').fill(String(originalScore));
+    await li.getByRole('button', { name: 'Add Result' }).click();
+
+    const originalCourseLi = li.getByRole('listitem').filter({ hasText: `${originalName}: ${originalScore}` });
+    await expect(originalCourseLi).toHaveCount(1);
+
+    // 3) Click Edit for that course
+    await originalCourseLi.getByRole('button', { name: 'Edit' }).click();
+
+    // 4) Change name and score in the inline form and Save (scope to the list item that now contains a Save button)
+    const updatedName = `${originalName} - Updated`;
+    const updatedScore = originalScore + 5;
+    const editForm = page.locator('form').filter({ has: page.getByRole('button', { name: 'Save' }) }).first();
+    await expect(editForm.getByRole('button', { name: 'Save' })).toBeVisible();
+    await editForm.getByPlaceholder('Course name').fill(updatedName);
+    await editForm.getByPlaceholder('Score').fill(String(updatedScore));
+    await editForm.getByRole('button', { name: 'Save' }).click();
+
+    // 5) Verify updated values are shown
+    const updatedCourseLi = li.getByRole('listitem').filter({ hasText: `${updatedName}: ${updatedScore}` });
+    await expect(updatedCourseLi).toHaveCount(1);
+
+    // 6) Reload and verify persistence
+    await page.reload();
+    const liAfterReload = await findUserListItem(page, fullName);
+    await expect(liAfterReload.getByRole('listitem').filter({ hasText: `${updatedName}: ${updatedScore}` })).toHaveCount(1);
+
+    // 7) Cleanup: delete the updated course and then the user
+    const updatedCourseLiAfterReload = liAfterReload.getByRole('listitem').filter({ hasText: `${updatedName}: ${updatedScore}` });
+    await page.once('dialog', (dialog) => dialog.accept());
+    await updatedCourseLiAfterReload.getByRole('button', { name: 'Delete' }).click();
+    await expect(updatedCourseLiAfterReload).toHaveCount(0);
+
+    await liAfterReload.getByRole('button', { name: 'Delete' }).click();
+    await expect(page.getByRole('listitem').filter({ hasText: fullName })).toHaveCount(0);
+  });
 });

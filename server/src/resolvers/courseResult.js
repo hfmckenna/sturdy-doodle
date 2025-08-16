@@ -33,7 +33,7 @@ export default {
             })
             return deleted
         },
-        updateCourseResult: async (parent, {id, name, score, learnerId}, {db}, info) => {
+        updateCourseResult: async (parent, {id, name, score}, {db}, info) => {
             let updated = null
             await db.update(({courseResults}) => {
                 const idx = courseResults.findIndex(c => c.id === id)
@@ -43,7 +43,6 @@ export default {
                         ...current,
                         ...(name !== undefined ? {name} : {}),
                         ...(score !== undefined ? {score} : {}),
-                        ...(learnerId !== undefined ? {learnerId} : {}),
                     }
                     courseResults[idx] = next
                     updated = next
