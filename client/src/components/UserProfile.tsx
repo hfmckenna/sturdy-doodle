@@ -1,6 +1,7 @@
 import {useMutation, useQuery} from "@apollo/client";
 import {DELETE_USER, GET_USERS} from "../services/user.ts";
 import type {User} from "../models/domain.ts";
+import {Courses} from "./Courses.tsx";
 
 export const UserProfile = ({user}: { user: User }) => {
     const {refetch} = useQuery(GET_USERS)
@@ -15,6 +16,9 @@ export const UserProfile = ({user}: { user: User }) => {
                 <div>
                     <strong>{user.firstName} {user.lastName}</strong>
                     <div>{user.email}</div>
+                    {user.courseResults && user.courseResults.length > 0 && (
+                        <Courses courses={user.courseResults}/>
+                    )}
                 </div>
                 <div>
                     <button onClick={() => handleDelete(user.id)}>Delete</button>
