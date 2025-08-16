@@ -5,7 +5,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import './index.css'
 import App from './App.tsx'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/graphql';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/';
 
 const client = new ApolloClient({
   uri: API_URL,

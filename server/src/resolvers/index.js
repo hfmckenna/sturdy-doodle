@@ -17,5 +17,7 @@ const customScalarResolver = {
 }
 
 export default [
-  userResolvers, courseResultResolvers
+  customScalarResolver,
+  userResolvers,
+  courseResultResolvers
 ]
