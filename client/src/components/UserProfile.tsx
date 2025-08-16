@@ -3,6 +3,7 @@ import {DELETE_USER, GET_USERS} from "../services/user.ts";
 import type {User} from "../models/domain.ts";
 import {Courses} from "./Courses.tsx";
 import {UserForm} from "./UserForm.tsx";
+import { CourseResultForm } from "./CourseResultForm.tsx";
 
 export const UserProfile = ({user}: { user: User }) => {
     const {refetch} = useQuery(GET_USERS)
@@ -20,6 +21,8 @@ export const UserProfile = ({user}: { user: User }) => {
                     {user.courseResults && user.courseResults.length > 0 && (
                         <Courses courses={user.courseResults}/>
                     )}
+                    {/* Always show add form so user can add results even if none exist yet */}
+                    <CourseResultForm learnerId={user.id} />
                     <details style={{marginTop: 8}}>
                         <summary style={{cursor: 'pointer'}}>Edit</summary>
                         <div style={{marginTop: 8}}>

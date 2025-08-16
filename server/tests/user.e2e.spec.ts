@@ -99,3 +99,39 @@ test.describe('User update (UserForm edit)', () => {
     await expect(page.getByRole('listitem').filter({ hasText: updatedFullName })).toHaveCount(0);
   });
 });
+
+
+
+test.describe('Course results', () => {
+  test('should add a course result to a user and display it', async ({ page }) => {
+    const user = uniqueUser();
+
+    await page.goto('/');
+    await expect(page.getByRole('heading', { name: 'User View' })).toBeVisible();
+
+    // Create user
+    const createForm = page.locator('form').filter({ has: page.getByRole('button', { name: 'Add User' }) });
+    await createForm.getByPlaceholder('First name').fill(user.firstName);
+    await createForm.getByPlaceholder('Last name').fill(user.lastName);
+    await createForm.getByPlaceholder('Email').fill(user.email);
+    await createForm.getByRole('button', { name: 'Add User' }).click();
+
+    const fullName = `${user.firstName} ${user.lastName}`;
+    const li = await findUserListItem(page, fullName);
+    await expect(li).toContainText(user.email);
+
+    // Fill the Add Course Result form within this user's list item
+    const courseName = `Course ${Date.now()}`;
+    const score = 88;
+    await li.getByPlaceholder('Course name').fill(courseName);
+    await li.getByPlaceholder('Score').fill(String(score));
+    await li.getByRole('button', { name: 'Add Result' }).click();
+
+    // Verify the course appears
+    await expect(li).toContainText(`${courseName}: ${score}`);
+
+    // Cleanup: delete the user
+    await li.getByRole('button', { name: 'Delete' }).click();
+    await expect(page.getByRole('listitem').filter({ hasText: fullName })).toHaveCount(0);
+  });
+});
