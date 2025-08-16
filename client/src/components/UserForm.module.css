@@ -36,3 +36,9 @@
     flex: 1 1 auto;
   }
 }
+
+@media (max-width: 520px) {
+  .formRow button {
+    width: 100%; /* full-width primary actions on small screens */
+  }
+}

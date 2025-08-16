@@ -10,7 +10,11 @@
 .row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+}
+
+.nameBlock {
+  width: 100%;
 }
 
 .details {
@@ -21,10 +25,64 @@
   cursor: pointer;
 }
 
-.actions button {
-  padding: 6px 10px;
-  border: 1px solid #d0d0d0;
-  border-radius: 10px;
-  background: #fff;
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center; /* center actions per item */
+}
+
+/* Colorful action buttons for visibility */
+.showBtn,
+.editBtn,
+.deleteBtn {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
   cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.showBtn { /* iOS blue */
+  background: #0a84ff;
+}
+.showBtn:hover { filter: brightness(0.95); }
+
+.editBtn { /* iOS indigo */
+  background: #5856d6;
+}
+.editBtn:hover { filter: brightness(0.95); }
+
+.deleteBtn { /* iOS red, used inside modal */
+  background: #ff3b30;
+}
+.deleteBtn:hover { filter: brightness(0.95); }
+
+.modalActions {
+  display: flex;
+  justify-content: center; /* center the Delete action in modal */
+  margin-top: 12px;
+}
+
+.detailsHeader {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 520px) {
+  .row {
+    flex-direction: column; /* stack name and actions vertically */
+    align-items: stretch;
+    gap: 8px;
+  }
+  .actions {
+    flex-direction: column; /* place buttons on separate rows */
+  }
+  .actions button,
+  .showBtn,
+  .editBtn {
+    width: 100%; /* full-width buttons on small screens */
+  }
+  .modalActions {
+    justify-content: center;
+  }
 }

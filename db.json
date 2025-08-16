@@ -15,14 +15,8 @@
     {
       "id": "7578232c-0c4c-4071-870c-7d619b0c8367",
       "firstName": "Me",
-      "lastName": "you",
+      "lastName": "yous",
       "email": "hi@x.co"
-    },
-    {
-      "id": "7544a307-9f2e-456d-83a8-df150740b841",
-      "firstName": "Wr",
-      "lastName": "No",
-      "email": "h@example.com"
     }
   ],
   "courseResults": [
@@ -70,7 +64,13 @@
     },
     {
       "id": "2f1343d2-88ec-42d7-8725-880ab7edb89b",
-      "name": "Hi",
+      "name": "His",
+      "score": 2,
+      "learnerId": "7578232c-0c4c-4071-870c-7d619b0c8367"
+    },
+    {
+      "id": "b625402e-b910-4d7f-a113-49b08eb9a9ef",
+      "name": "What",
       "score": 2,
       "learnerId": "7578232c-0c4c-4071-870c-7d619b0c8367"
     }

@@ -16,14 +16,18 @@ export const UserView = () => {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>User View</h1>
-            <button className={styles.newUserButton} onClick={() => setShowCreate(true)}>New User</button>
-            <Modal open={showCreate} title="Create User" onClose={() => setShowCreate(false)}>
-                <UserForm onSubmitted={() => setShowCreate(false)}/>
-            </Modal>
-            <ul className={styles.list}>
-                {users.map((u: User) => <UserProfile key={u.id} user={u}/>)}
-            </ul>
+            <div className={styles.narrow}>
+                <h1 className={styles.title}>User View</h1>
+                <div className={styles.actionsCenter}>
+                    <button className={styles.newUserButton} onClick={() => setShowCreate(true)}>New User</button>
+                </div>
+                <Modal open={showCreate} title="Create User" onClose={() => setShowCreate(false)}>
+                    <UserForm onSubmitted={() => setShowCreate(false)}/>
+                </Modal>
+                <ul className={styles.list}>
+                    {users.map((u: User) => <UserProfile key={u.id} user={u}/>) }
+                </ul>
+            </div>
         </div>
     )
 }

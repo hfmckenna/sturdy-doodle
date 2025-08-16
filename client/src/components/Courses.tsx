@@ -34,8 +34,8 @@ export const Courses = ({courses}: { courses: CourseResult[] }) => {
                         ) : (
                             <>
                                 <span>{cr.name}</span>: <span>{cr.score}</span>
-                                <button className={styles.button} onClick={() => setEditId(cr.id ?? null)}>Edit</button>
-                                <button className={styles.button} onClick={() => handleDelete(cr.id, cr.name)}>Delete</button>
+                                <button className={styles.editBtn} onClick={() => setEditId(cr.id ?? null)}>Edit</button>
+                                <button className={styles.deleteBtn} onClick={() => handleDelete(cr.id, cr.name)}>Delete</button>
                             </>
                         )}
                     </li>

@@ -47,9 +47,9 @@ export const CourseResultForm = ({
             <input name="name" placeholder="Course name" defaultValue={course?.name ?? ""}/>
             <input name="score" placeholder="Score" type="number" min={0} max={100}
                    defaultValue={course?.score?.toString() ?? ""}/>
-            <button type="submit">{isEdit ? "Save" : "Add Result"}</button>
+            <button className={styles.primaryBtn} type="submit">{isEdit ? "Save" : "Add Result"}</button>
             {isEdit && onCancel && (
-                <button type="button" onClick={onCancel}>Cancel</button>
+                <button className={styles.cancelBtn} type="button" onClick={onCancel}>Cancel</button>
             )}
         </form>
     );

@@ -15,7 +15,7 @@
   border-radius: 12px;
   border: 1px solid #e5e5ea;
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  width: clamp(320px, 90vw, 720px); /* responsive width: grows but not fixed */
+  width: clamp(320px, 90vw, 600px); /* narrower desktop dialog */
   max-height: 90vh;
   overflow: auto;
   padding: 16px;

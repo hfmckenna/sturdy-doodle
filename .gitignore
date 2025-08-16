@@ -5,6 +5,3 @@ client/node_modules
 .vscode
 .DS_Store
 .pnpm-debug.log
-
-# Tests
-**/test-results

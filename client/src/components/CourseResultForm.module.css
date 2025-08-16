@@ -26,6 +26,20 @@
   background: #f2f2f2;
 }
 
+/* Colored variants for primary and cancel actions */
+.primaryBtn {
+  border: none;
+  background: #34c759; /* iOS system green */
+  color: #fff;
+}
+.primaryBtn:hover { filter: brightness(0.95); }
+
+.cancelBtn {
+  background: #e5e5ea; /* iOS system gray 5 */
+  border: none;
+}
+.cancelBtn:hover { filter: brightness(0.97); }
+
 @media (min-width: 720px) {
   .formRow {
     flex-direction: row;
@@ -33,5 +47,13 @@
   }
   .formRow input {
     flex: 1 1 auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .formRow button,
+  .primaryBtn,
+  .cancelBtn {
+    width: 100%;
   }
 }

@@ -24,23 +24,23 @@ export const UserProfile = ({user}: { user: User }) => {
     return (
         <li key={user.id} className={styles.item}>
             <div className={styles.row}>
-                <div>
+                <div className={styles.nameBlock}>
                     <strong>{user.firstName} {user.lastName}</strong>
                 </div>
                 <div className={styles.actions}>
-                    <button onClick={() => setShowDetails(true)}>Show Details</button>
-                    <button onClick={() => setShowEdit(true)}>Edit User</button>
+                    <button className={styles.showBtn} onClick={() => setShowDetails(true)}>Show Details</button>
+                    <button className={styles.editBtn} onClick={() => setShowEdit(true)}>Edit User</button>
                 </div>
             </div>
             <Modal open={showEdit} title="Edit User" onClose={() => setShowEdit(false)}>
                 <UserForm user={user} onSubmitted={() => setShowEdit(false)} />
-                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
-                    <button onClick={() => handleDelete(user.id)}>Delete</button>
+                <div className={styles.modalActions}>
+                    <button className={styles.deleteBtn} onClick={() => handleDelete(user.id)}>Delete</button>
                 </div>
             </Modal>
             <Modal open={showDetails} title="User Details" onClose={() => setShowDetails(false)}>
                 <div>
-                    <div style={{marginBottom: 8}}>
+                    <div className={styles.detailsHeader}>
                         <strong>{user.firstName} {user.lastName}</strong>
                         <div>{user.email}</div>
                     </div>
