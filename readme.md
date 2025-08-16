@@ -1,24 +1,50 @@
-# usecure Technical Test
-This test is split in to folders, client and server.
+# usecure Users & Courses App
 
-Client will serve all of the front end react based components and the server will serve as a GraphQL endpoint.
+This repository contains a small full‑stack app with a React client and a GraphQL server. It lets you manage users and
+their course results with a clean, mobile‑friendly UI and full end‑to‑end tests.
 
-For this test you must create a page listing all of the users in the database with full CRUD operations.
+## How the application works (current state)
 
-Demo code has been provided where needed to show you how to use GraphQL queries and mutations. You can find more information via [their docs](https://www.apollographql.com/docs/react/data/queries/).
+- Manage users via New User (create modal) and Edit User (edit modal with Delete + confirm).
+- Show Details modal displays full name, email, and the Courses section.
+- Courses: view results, add a result, inline edit (Save/Cancel), delete with confirmation.
+- Accessible modals; responsive, mobile‑friendly CSS modules with clear colored buttons.
+- Data updates refresh the list; changes persist in lowdb (db.json).
 
-There are various bugs scattered around that you are expected to find and fix yourself.
+## Getting started (development)
 
-Use of a UI library is fine. Internally we use a component library built on Tailwind but you're welcome to use whatever you prefer.
+Prerequisites:
 
-For the sake of this demo, we use [lowdb](https://github.com/typicode/lowdb) for storing our data, so you don't get stuck setting up a proper database. 
+- Node.js 18+ recommended
+- npm 9+ recommended
 
-You should have:
-* A way to display all users
-* A way to display all of a specific users information and course results
-    * On this page you should be able to view all course results for a user
-    * Create/Edit/Delete course results for a user
-* A page/modal to edit a user
-* A page/modal to create a user
-* A modal/confirmation to delete a user
+Install dependencies:
 
+```shell
+pnpm --prefix client install
+```
+
+```shell
+pnpm --prefix server install
+```
+
+Run the development servers (two terminals):
+
+```shell
+pnpm --prefix server run start
+```
+
+```shell
+pnpm --prefix client run dev
+```
+
+Run tests:
+
+```shell
+pnpm --prefix server run test
+```
+
+Data persistence:
+
+- The server uses lowdb and stores data in `db.json` at the repo root. You can back it up, reset it, or edit it between
+  runs if needed.
