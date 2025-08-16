@@ -14,7 +14,7 @@ export default {
             return db.chain.get('users').value()
         },
         user: async (parent, {id}, {db}, info) => {
-            return db.chain.get('users').getById(id).value()
+            return db.chain.get('users').find(id).value()
         }
     },
     Mutation: {
