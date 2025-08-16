@@ -30,13 +30,15 @@ export default {
             return newUser
         },
         deleteUser: async (parent, {id}, {db}, info) => {
-            const existing = db.chain.get('users')
-            if (!existing) return false
-            db.update(({users}) => {
+            let deleted = false
+            await db.update(({users}) => {
                 const idx = users.findIndex(u => u.id === id)
-                if (idx !== -1) users.splice(idx, 1)
+                if (idx !== -1) {
+                    users.splice(idx, 1)
+                    deleted = true
+                }
             })
-            return true
+            return deleted
         },
         updateUser: async (parent, {id, firstName, lastName, email}, {db}, info) => {
             // ToDo: Update user
