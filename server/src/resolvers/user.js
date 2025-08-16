@@ -18,7 +18,7 @@ export default {
         }
     },
     Mutation: {
-        createUser: async (parent, {lastName, email}, {db}, info) => {
+        createUser: async (parent, {firstName, lastName, email}, {db}, info) => {
             const newUser = {
                 id: randomUUID(),
                 firstName,
@@ -26,7 +26,6 @@ export default {
                 email
             }
             db.update(({users}) => users.push(newUser))
-
             return newUser
         },
         deleteUser: async (parent, {id}, {db}, info) => {
@@ -41,7 +40,6 @@ export default {
             return deleted
         },
         updateUser: async (parent, {id, firstName, lastName, email}, {db}, info) => {
-            // ToDo: Update user
         }
     }
 }

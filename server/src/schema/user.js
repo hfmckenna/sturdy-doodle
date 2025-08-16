@@ -3,14 +3,14 @@ import gql from 'graphql-tag'
 export default gql`
     extend type Query {
         users: [User!]
-        user(id: ID!): User!
+        user(id: ID!): User
     }
 
     type User {
-        id: ID
-        firstName: String
-        lastName: String
-        email: String
+        id: ID!
+        firstName: String!
+        lastName: String!
+        email: String!
     }
 
     extend type Mutation {
