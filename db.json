@@ -1,12 +1,6 @@
 {
   "users": [
     {
-      "id": "035bde07-cee6-4bd0-ac12-5fe39ea66b71",
-      "firstName": "E2E1755351694608",
-      "lastName": "User",
-      "email": "e2e.1755351694608@test.local"
-    },
-    {
       "id": "e3f830c4-c6c7-4357-9347-e2bbbce91dfb",
       "firstName": "E2E1755351737324",
       "lastName": "User",
@@ -23,6 +17,12 @@
       "firstName": "Me",
       "lastName": "you",
       "email": "hi@x.co"
+    },
+    {
+      "id": "7544a307-9f2e-456d-83a8-df150740b841",
+      "firstName": "Wr",
+      "lastName": "No",
+      "email": "h@example.com"
     }
   ],
   "courseResults": [
@@ -53,7 +53,7 @@
     {
       "id": "7668b833-e992-433d-a58b-e6d44e5764d2",
       "name": "Course 1755351737586",
-      "score": 73,
+      "score": 5,
       "learnerId": "e3f830c4-c6c7-4357-9347-e2bbbce91dfb"
     },
     {
@@ -65,6 +65,12 @@
     {
       "id": "43323c80-cfcf-44ac-a3a5-33e284f9f61c",
       "name": "RT",
+      "score": 2,
+      "learnerId": "7578232c-0c4c-4071-870c-7d619b0c8367"
+    },
+    {
+      "id": "2f1343d2-88ec-42d7-8725-880ab7edb89b",
+      "name": "Hi",
       "score": 2,
       "learnerId": "7578232c-0c4c-4071-870c-7d619b0c8367"
     }

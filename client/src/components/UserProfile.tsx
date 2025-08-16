@@ -12,6 +12,7 @@ export const UserProfile = ({user}: { user: User }) => {
     const {refetch} = useQuery(GET_USERS)
     const [deleteUser] = useMutation(DELETE_USER)
     const [showEdit, setShowEdit] = useState(false)
+    const [showDetails, setShowDetails] = useState(false)
 
     const handleDelete = async (id: string) => {
         const ok = window.confirm(`Are you sure you want to delete ${user.firstName} ${user.lastName}?`)
@@ -25,14 +26,9 @@ export const UserProfile = ({user}: { user: User }) => {
             <div className={styles.row}>
                 <div>
                     <strong>{user.firstName} {user.lastName}</strong>
-                    <div>{user.email}</div>
-                    {user.courseResults && user.courseResults.length > 0 && (
-                        <Courses courses={user.courseResults}/>
-                    )}
-                    {/* Always show add form so user can add results even if none exist yet */}
-                    <CourseResultForm learnerId={user.id}/>
                 </div>
                 <div className={styles.actions}>
+                    <button onClick={() => setShowDetails(true)}>Show Details</button>
                     <button onClick={() => setShowEdit(true)}>Edit User</button>
                 </div>
             </div>
@@ -40,6 +36,19 @@ export const UserProfile = ({user}: { user: User }) => {
                 <UserForm user={user} onSubmitted={() => setShowEdit(false)} />
                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
                     <button onClick={() => handleDelete(user.id)}>Delete</button>
+                </div>
+            </Modal>
+            <Modal open={showDetails} title="User Details" onClose={() => setShowDetails(false)}>
+                <div>
+                    <div style={{marginBottom: 8}}>
+                        <strong>{user.firstName} {user.lastName}</strong>
+                        <div>{user.email}</div>
+                    </div>
+                    {user.courseResults && user.courseResults.length > 0 && (
+                        <Courses courses={user.courseResults}/>
+                    )}
+                    {/* Always show add form so user can add results even if none exist yet */}
+                    <CourseResultForm learnerId={user.id}/>
                 </div>
             </Modal>
         </li>)
