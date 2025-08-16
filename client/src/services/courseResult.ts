@@ -10,3 +10,9 @@ export const CREATE_COURSE_RESULT = gql`
         }
     }
 `
+
+export const DELETE_COURSE_RESULT = gql`
+    mutation DeleteCourseResult($id: ID!) {
+        deleteCourseResult(id: $id)
+    }
+`

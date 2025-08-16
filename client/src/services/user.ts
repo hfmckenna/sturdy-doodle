@@ -8,6 +8,7 @@ export const GET_USERS = gql`
             lastName
             email
             courseResults {
+                id
                 name
                 score
             }

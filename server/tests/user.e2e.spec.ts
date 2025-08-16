@@ -103,7 +103,7 @@ test.describe('User update (UserForm edit)', () => {
 
 
 test.describe('Course results', () => {
-  test('should add a course result to a user and display it', async ({ page }) => {
+  test('should add a course result to a user, display it, then delete it', async ({ page }) => {
     const user = uniqueUser();
 
     await page.goto('/');
@@ -129,6 +129,14 @@ test.describe('Course results', () => {
 
     // Verify the course appears
     await expect(li).toContainText(`${courseName}: ${score}`);
+
+    // Delete the newly added course result (accept the confirm dialog)
+    const courseLi = li.getByRole('listitem').filter({ hasText: `${courseName}: ${score}` });
+    await page.once('dialog', (dialog) => dialog.accept());
+    await courseLi.getByRole('button', { name: 'Delete' }).click();
+
+    // Verify the course is removed from this user's course list
+    await expect(courseLi).toHaveCount(0);
 
     // Cleanup: delete the user
     await li.getByRole('button', { name: 'Delete' }).click();

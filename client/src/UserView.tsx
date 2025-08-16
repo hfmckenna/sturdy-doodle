@@ -6,7 +6,6 @@ import {UserForm} from "./components/UserForm.tsx";
 
 export const UserView = () => {
     const {loading, error, data} = useQuery(GET_USERS)
-    console.log(error)
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error!</p>
     const users: User[] = data?.users ?? []

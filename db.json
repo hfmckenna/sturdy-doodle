@@ -15,25 +15,15 @@
   ],
   "courseResults": [
     {
+      "id": "10e8862d-0fb6-4525-bfa9-a6d3a463695b",
       "name": "Test Course",
       "score": 100,
       "learnerId": "bc3e02fa-8a5e-4c1c-b78a-9dad0505876f"
     },
     {
+      "id": "10e8862d-0fb6-4525-bfa12-a8d3a463695b",
       "name": "Test Course 2",
       "score": 50,
-      "learnerId": "bc3e02fa-8a5e-4c1c-b78a-9dad0505876f"
-    },
-    {
-      "id": "10e8862d-0fb6-4525-bfa9-a3d3a463695b",
-      "name": "Course 1755348651395",
-      "score": 88,
-      "learnerId": "8ded0067-0621-4cf2-b95d-d55c15cb83ff"
-    },
-    {
-      "id": "7c8a6f00-3cfe-4d0f-94dd-0793fc50f4ae",
-      "name": "Contract Testing",
-      "score": 45,
       "learnerId": "bc3e02fa-8a5e-4c1c-b78a-9dad0505876f"
     },
     {
