@@ -1,6 +1,7 @@
 import {useMutation, useQuery} from "@apollo/client";
 import {CREATE_USER, GET_USERS, UPDATE_USER} from "../services/user.ts";
 import type { User } from "../models/domain.ts";
+import styles from './UserForm.module.css';
 
 export const UserForm = ({ user }: { user?: User }) => {
     const {refetch} = useQuery(GET_USERS)
@@ -25,7 +26,7 @@ export const UserForm = ({ user }: { user?: User }) => {
         await refetch()
     }
 
-    return <form onSubmit={handleSubmit} style={{display: 'flex', gap: 8, marginBottom: 16}}>
+    return <form onSubmit={handleSubmit} className={styles.formRow}>
         <input name="firstName" placeholder="First name" defaultValue={user?.firstName}/>
         <input name="lastName" placeholder="Last name" defaultValue={user?.lastName}/>
         <input name="email" placeholder="Email" type="email" defaultValue={user?.email}/>

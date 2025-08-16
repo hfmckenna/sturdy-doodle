@@ -2,6 +2,7 @@ import {useMutation, useQuery} from "@apollo/client";
 import {CREATE_COURSE_RESULT, UPDATE_COURSE_RESULT} from "../services/courseResult.ts";
 import {GET_USERS} from "../services/user.ts";
 import type {CourseResult} from "../models/domain.ts";
+import styles from './CourseResultForm.module.css';
 
 export const CourseResultForm = ({
                                      learnerId,
@@ -42,7 +43,7 @@ export const CourseResultForm = ({
     };
 
     return (
-        <form onSubmit={handleSubmit} style={{display: "flex", gap: 8, marginTop: 8}}>
+        <form onSubmit={handleSubmit} className={styles.formRow}>
             <input name="name" placeholder="Course name" defaultValue={course?.name ?? ""}/>
             <input name="score" placeholder="Score" type="number" min={0} max={100}
                    defaultValue={course?.score?.toString() ?? ""}/>

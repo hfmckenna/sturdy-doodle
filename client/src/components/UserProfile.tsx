@@ -4,6 +4,7 @@ import type {User} from "../models/domain.ts";
 import {Courses} from "./Courses.tsx";
 import {UserForm} from "./UserForm.tsx";
 import {CourseResultForm} from "./CourseResultForm.tsx";
+import styles from './UserProfile.module.css';
 
 export const UserProfile = ({user}: { user: User }) => {
     const {refetch} = useQuery(GET_USERS)
@@ -13,8 +14,8 @@ export const UserProfile = ({user}: { user: User }) => {
         await refetch()
     }
     return (
-        <li key={user.id} style={{border: '1px solid #ddd', margin: '8px 0', padding: 8}}>
-            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+        <li key={user.id} className={styles.item}>
+            <div className={styles.row}>
                 <div>
                     <strong>{user.firstName} {user.lastName}</strong>
                     <div>{user.email}</div>
@@ -23,14 +24,14 @@ export const UserProfile = ({user}: { user: User }) => {
                     )}
                     {/* Always show add form so user can add results even if none exist yet */}
                     <CourseResultForm learnerId={user.id}/>
-                    <details style={{marginTop: 8}}>
-                        <summary style={{cursor: 'pointer'}}>Edit User</summary>
-                        <div style={{marginTop: 8}}>
+                    <details className={styles.details}>
+                        <summary className={styles.summary}>Edit User</summary>
+                        <div className={styles.details}>
                             <UserForm user={user}/>
                         </div>
                     </details>
                 </div>
-                <div>
+                <div className={styles.actions}>
                     <button onClick={() => handleDelete(user.id)}>Delete</button>
                 </div>
             </div>

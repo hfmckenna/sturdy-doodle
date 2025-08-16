@@ -4,6 +4,7 @@ import { DELETE_COURSE_RESULT } from "../services/courseResult.ts";
 import { GET_USERS } from "../services/user.ts";
 import { useState } from "react";
 import { CourseResultForm } from "./CourseResultForm.tsx";
+import styles from './Courses.module.css';
 
 export const Courses = ({courses}: { courses: CourseResult[] }) => {
     const { refetch } = useQuery(GET_USERS);
@@ -19,11 +20,11 @@ export const Courses = ({courses}: { courses: CourseResult[] }) => {
     };
 
     return (
-        <div style={{marginTop: 8}}>
-            <div style={{fontWeight: 600}}>Course Results</div>
-            <ul style={{margin: '4px 0 0 16px', padding: 0}}>
+        <div className={styles.container}>
+            <div className={styles.header}>Course Results</div>
+            <ul className={styles.list}>
                 {courses.map((cr, idx) => (
-                    <li key={cr.id ?? idx} style={{ marginBottom: 6 }}>
+                    <li key={cr.id ?? idx} className={styles.listItem}>
                         {editId === cr.id ? (
                             <CourseResultForm
                                 course={cr}
@@ -33,8 +34,8 @@ export const Courses = ({courses}: { courses: CourseResult[] }) => {
                         ) : (
                             <>
                                 <span>{cr.name}</span>: <span>{cr.score}</span>
-                                <button style={{ marginLeft: 8 }} onClick={() => setEditId(cr.id ?? null)}>Edit</button>
-                                <button style={{ marginLeft: 8 }} onClick={() => handleDelete(cr.id, cr.name)}>Delete</button>
+                                <button className={styles.button} onClick={() => setEditId(cr.id ?? null)}>Edit</button>
+                                <button className={styles.button} onClick={() => handleDelete(cr.id, cr.name)}>Delete</button>
                             </>
                         )}
                     </li>

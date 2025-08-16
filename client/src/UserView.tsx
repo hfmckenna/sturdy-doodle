@@ -3,6 +3,7 @@ import {UserProfile} from "./components/UserProfile.tsx";
 import {GET_USERS} from "./services/user.ts";
 import type {User} from "./models/domain.ts";
 import {UserForm} from "./components/UserForm.tsx";
+import styles from './UserView.module.css';
 
 export const UserView = () => {
     const {loading, error, data} = useQuery(GET_USERS)
@@ -11,10 +12,10 @@ export const UserView = () => {
     const users: User[] = data?.users ?? []
 
     return (
-        <div style={{padding: 16}}>
-            <h1>User View</h1>
+        <div className={styles.container}>
+            <h1 className={styles.title}>User View</h1>
             <UserForm/>
-            <ul>
+            <ul className={styles.list}>
                 {users.map((u: User) => <UserProfile key={u.id} user={u}/>)}
             </ul>
         </div>

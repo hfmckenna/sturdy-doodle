@@ -1,0 +1,30 @@
+.item {
+  border: 1px solid #e5e5ea; /* subtle separator akin to iOS */
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.details {
+  margin-top: 8px;
+}
+
+.summary {
+  cursor: pointer;
+}
+
+.actions button {
+  padding: 6px 10px;
+  border: 1px solid #d0d0d0;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+}
