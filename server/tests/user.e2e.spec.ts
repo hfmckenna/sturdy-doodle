@@ -46,8 +46,11 @@ test.describe('User create and delete', () => {
     const li = await findUserListItem(page, fullName);
     await expect(li).toContainText(user.email);
 
-    // Delete the user
-    await li.getByRole('button', { name: 'Delete' }).click();
+    // Delete the user via Edit User modal
+    await li.getByRole('button', { name: 'Edit User' }).click();
+    const editDialog = page.getByRole('dialog', { name: 'Edit User' });
+    await page.once('dialog', (dialog) => dialog.accept());
+    await editDialog.getByRole('button', { name: 'Delete' }).click();
 
     // Assert the user is removed
     await expect(page.getByRole('listitem').filter({ hasText: fullName })).toHaveCount(0);
@@ -73,23 +76,24 @@ test.describe('User update (UserForm edit)', () => {
     const originalLi = await findUserListItem(page, originalFullName);
     await expect(originalLi).toContainText(user.email);
 
-    // 2) Open the Edit details panel for that user
-    await originalLi.locator('summary', { hasText: 'Edit' }).click();
+    // 2) Open the Edit User modal for that user
+    await originalLi.getByRole('button', { name: 'Edit User' }).click();
 
-    // 3) Update each field in the embedded UserForm
+    // 3) Update each field in the UserForm within the modal
     const updated = {
       firstName: `${user.firstName}-Updated`,
       lastName: `${user.lastName}-Changed`,
       email: `updated+${user.email}`,
     };
 
-    // Scope all interactions to the same list item to avoid targeting the top create form
-    await originalLi.getByPlaceholder('First name').fill(updated.firstName);
-    await originalLi.getByPlaceholder('Last name').fill(updated.lastName);
-    await originalLi.getByPlaceholder('Email').fill(updated.email);
+    const editDialog = page.getByRole('dialog', { name: 'Edit User' });
+    const editForm = editDialog.locator('form');
+    await editForm.getByPlaceholder('First name').fill(updated.firstName);
+    await editForm.getByPlaceholder('Last name').fill(updated.lastName);
+    await editForm.getByPlaceholder('Email').fill(updated.email);
 
-    // 4) Submit the update form
-    await originalLi.getByRole('button', { name: 'Update User' }).click();
+    // 4) Submit the update form (modal should close automatically)
+    await editForm.getByRole('button', { name: 'Update User' }).click();
 
     const updatedFullName = `${updated.firstName} ${updated.lastName}`;
 
@@ -100,8 +104,11 @@ test.describe('User update (UserForm edit)', () => {
     // Also verify the old full name is no longer present
     await expect(page.getByRole('listitem').filter({ hasText: originalFullName })).toHaveCount(0);
 
-    // 6) Cleanup: delete the updated user
-    await updatedLi.getByRole('button', { name: 'Delete' }).click();
+    // 6) Cleanup: delete the updated user via Edit User modal
+    await updatedLi.getByRole('button', { name: 'Edit User' }).click();
+    const editDialogAfterUpdate = page.getByRole('dialog', { name: 'Edit User' });
+    await page.once('dialog', (dialog) => dialog.accept());
+    await editDialogAfterUpdate.getByRole('button', { name: 'Delete' }).click();
     await expect(page.getByRole('listitem').filter({ hasText: updatedFullName })).toHaveCount(0);
   });
 });
@@ -146,8 +153,11 @@ test.describe('Course results', () => {
     // Verify the course is removed from this user's course list
     await expect(courseLi).toHaveCount(0);
 
-    // Cleanup: delete the user
-    await li.getByRole('button', { name: 'Delete' }).click();
+    // Cleanup: delete the user via Edit User modal
+    await li.getByRole('button', { name: 'Edit User' }).click();
+    const editDialog2 = page.getByRole('dialog', { name: 'Edit User' });
+    await page.once('dialog', (dialog) => dialog.accept());
+    await editDialog2.getByRole('button', { name: 'Delete' }).click();
     await expect(page.getByRole('listitem').filter({ hasText: fullName })).toHaveCount(0);
   });
 
@@ -206,7 +216,10 @@ test.describe('Course results', () => {
     await updatedCourseLiAfterReload.getByRole('button', { name: 'Delete' }).click();
     await expect(updatedCourseLiAfterReload).toHaveCount(0);
 
-    await liAfterReload.getByRole('button', { name: 'Delete' }).click();
+    await liAfterReload.getByRole('button', { name: 'Edit User' }).click();
+    const editDialog3 = page.getByRole('dialog', { name: 'Edit User' });
+    await page.once('dialog', (dialog) => dialog.accept());
+    await editDialog3.getByRole('button', { name: 'Delete' }).click();
     await expect(page.getByRole('listitem').filter({ hasText: fullName })).toHaveCount(0);
   });
 });

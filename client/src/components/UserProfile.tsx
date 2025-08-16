@@ -4,14 +4,21 @@ import type {User} from "../models/domain.ts";
 import {Courses} from "./Courses.tsx";
 import {UserForm} from "./UserForm.tsx";
 import {CourseResultForm} from "./CourseResultForm.tsx";
+import {useState} from 'react';
+import {Modal} from './Modal.tsx';
 import styles from './UserProfile.module.css';
 
 export const UserProfile = ({user}: { user: User }) => {
     const {refetch} = useQuery(GET_USERS)
     const [deleteUser] = useMutation(DELETE_USER)
+    const [showEdit, setShowEdit] = useState(false)
+
     const handleDelete = async (id: string) => {
+        const ok = window.confirm(`Are you sure you want to delete ${user.firstName} ${user.lastName}?`)
+        if (!ok) return;
         await deleteUser({variables: {id}})
         await refetch()
+        setShowEdit(false)
     }
     return (
         <li key={user.id} className={styles.item}>
@@ -24,16 +31,16 @@ export const UserProfile = ({user}: { user: User }) => {
                     )}
                     {/* Always show add form so user can add results even if none exist yet */}
                     <CourseResultForm learnerId={user.id}/>
-                    <details className={styles.details}>
-                        <summary className={styles.summary}>Edit User</summary>
-                        <div className={styles.details}>
-                            <UserForm user={user}/>
-                        </div>
-                    </details>
                 </div>
                 <div className={styles.actions}>
-                    <button onClick={() => handleDelete(user.id)}>Delete</button>
+                    <button onClick={() => setShowEdit(true)}>Edit User</button>
                 </div>
             </div>
+            <Modal open={showEdit} title="Edit User" onClose={() => setShowEdit(false)}>
+                <UserForm user={user} onSubmitted={() => setShowEdit(false)} />
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
+                    <button onClick={() => handleDelete(user.id)}>Delete</button>
+                </div>
+            </Modal>
         </li>)
 }
