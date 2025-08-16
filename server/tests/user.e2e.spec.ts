@@ -27,13 +27,17 @@ test.describe('User create and delete', () => {
     // Expect header is visible
     await expect(page.getByRole('heading', { name: 'User View' })).toBeVisible();
 
-    // Fill the create user form (scope specifically to the Add User form)
-    const createForm = page.locator('form').filter({ has: page.getByRole('button', { name: 'Add User' }) });
+    // Open the Create User modal
+    await page.getByRole('button', { name: 'New User' }).click();
+
+    // Fill the create user form within the dialog
+    const dialog = page.getByRole('dialog', { name: 'Create User' });
+    const createForm = dialog.locator('form');
     await createForm.getByPlaceholder('First name').fill(user.firstName);
     await createForm.getByPlaceholder('Last name').fill(user.lastName);
     await createForm.getByPlaceholder('Email').fill(user.email);
 
-    // Submit
+    // Submit (modal should close automatically)
     await createForm.getByRole('button', { name: 'Add User' }).click();
 
     const fullName = `${user.firstName} ${user.lastName}`;
@@ -57,7 +61,9 @@ test.describe('User update (UserForm edit)', () => {
     // 1) Create a user that we will later update
     await page.goto('/');
     await expect(page.getByRole('heading', { name: 'User View' })).toBeVisible();
-    const createForm = page.locator('form').filter({ has: page.getByRole('button', { name: 'Add User' }) });
+    await page.getByRole('button', { name: 'New User' }).click();
+    const dialog = page.getByRole('dialog', { name: 'Create User' });
+    const createForm = dialog.locator('form');
     await createForm.getByPlaceholder('First name').fill(user.firstName);
     await createForm.getByPlaceholder('Last name').fill(user.lastName);
     await createForm.getByPlaceholder('Email').fill(user.email);
@@ -109,8 +115,10 @@ test.describe('Course results', () => {
     await page.goto('/');
     await expect(page.getByRole('heading', { name: 'User View' })).toBeVisible();
 
-    // Create user
-    const createForm = page.locator('form').filter({ has: page.getByRole('button', { name: 'Add User' }) });
+    // Create user via modal
+    await page.getByRole('button', { name: 'New User' }).click();
+    const dialog = page.getByRole('dialog', { name: 'Create User' });
+    const createForm = dialog.locator('form');
     await createForm.getByPlaceholder('First name').fill(user.firstName);
     await createForm.getByPlaceholder('Last name').fill(user.lastName);
     await createForm.getByPlaceholder('Email').fill(user.email);
@@ -149,7 +157,9 @@ test.describe('Course results', () => {
     // 1) Create a user
     await page.goto('/');
     await expect(page.getByRole('heading', { name: 'User View' })).toBeVisible();
-    const createForm = page.locator('form').filter({ has: page.getByRole('button', { name: 'Add User' }) });
+    await page.getByRole('button', { name: 'New User' }).click();
+    const dialog = page.getByRole('dialog', { name: 'Create User' });
+    const createForm = dialog.locator('form');
     await createForm.getByPlaceholder('First name').fill(user.firstName);
     await createForm.getByPlaceholder('Last name').fill(user.lastName);
     await createForm.getByPlaceholder('Email').fill(user.email);

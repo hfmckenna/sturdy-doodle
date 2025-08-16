@@ -3,7 +3,7 @@ import {CREATE_USER, GET_USERS, UPDATE_USER} from "../services/user.ts";
 import type { User } from "../models/domain.ts";
 import styles from './UserForm.module.css';
 
-export const UserForm = ({ user }: { user?: User }) => {
+export const UserForm = ({ user, onSubmitted }: { user?: User, onSubmitted?: () => void }) => {
     const {refetch} = useQuery(GET_USERS)
     const [createUser] = useMutation(CREATE_USER)
     const [updateUser] = useMutation(UPDATE_USER)
@@ -24,6 +24,7 @@ export const UserForm = ({ user }: { user?: User }) => {
             form.reset()
         }
         await refetch()
+        onSubmitted?.()
     }
 
     return <form onSubmit={handleSubmit} className={styles.formRow}>

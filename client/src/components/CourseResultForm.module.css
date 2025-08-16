@@ -1,23 +1,37 @@
 .formRow {
   display: flex;
-  gap: 8px;
+  flex-direction: column; /* vertical by default for better responsiveness */
+  gap: 10px;
   margin-top: 8px;
+  width: 100%;
 }
 
 .formRow input {
-  padding: 6px 10px;
+  padding: 10px 12px;
   border: 1px solid #d0d0d0;
-  border-radius: 8px;
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .formRow button {
-  padding: 6px 10px;
+  padding: 10px 12px;
   border: 1px solid #d0d0d0;
-  border-radius: 10px;
+  border-radius: 12px;
   background: #fff;
   cursor: pointer;
 }
 
 .formRow button:hover {
   background: #f2f2f2;
+}
+
+@media (min-width: 720px) {
+  .formRow {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+  .formRow input {
+    flex: 1 1 auto;
+  }
 }
